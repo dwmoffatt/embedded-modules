@@ -71,31 +71,29 @@ function InstallSeggerJlink()
   fi
   chmod a-w "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}"
 
-  sudo ln -s "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}/JLinkExe" /usr/bin/
+  #sudo ln -s "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}/" /usr/bin/
 
   sudo cp "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}/99-jlink.rules" /etc/udev/rules.d/99-jlink.rules
 
-  echo "--- Verify Segger JLink ---"
-  echo "$(JLinkExe)"
 }
 
 function InstallToolchain()
 {
   echo "--- Installing Toolchain ---"
 
-  #wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.mpacbti-rel1/binrel/arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi.tar.xz
-  #sudo tar -xvf arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi.tar.xz -C /usr/share
-  #rm -rf arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi.tar.xz
+  wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
+  sudo tar -xf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz -C /usr/share
+  rm -rf arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi.tar.xz
 
-  #sudo ln -s /usr/share/arm-gnu-toolchain-12.2.mpacbti-rel1-x86_64-arm-none-eabi/bin/* /usr/bin/
+  sudo ln -sf /usr/share/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/* /usr/bin/
 
-  #sudo apt install -y libncurses5 libncursesw5
+  sudo apt install -y libncurses6 libncursesw6
 
-  #sudo add-apt-repository ppa:deadsnakes/ppa -y
-  #sudo apt update
-  #sudo apt install -y python3.8
+  sudo ln -sf /usr/lib/x86_64-linux-gnu/libncursesw.so.6 /usr/lib/x86_64-linux-gnu/libncursesw.so.5
+  sudo ln -sf /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
 
   echo "--- Verify Toolchain ---"
+  echo "$(arm-none-eabi-gcc --version)"
   echo "$(arm-none-eabi-gdb --version)"
 
 }
