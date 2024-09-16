@@ -22,8 +22,8 @@ This architecture will concist of common code used by different MCUs so each pro
 |       ├── common
 |       └── main
 ├── build
-├── install
-|   └── install_deps.sh
+├── setup
+|   └── setup.sh
 └── projects
     ├── boot_{mcu}
     ├── main_{project}_{mcu}
