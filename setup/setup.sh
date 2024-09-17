@@ -71,7 +71,7 @@ function InstallSeggerJlink()
   fi
   chmod a-w "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}"
 
-  #sudo ln -s "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}/" /usr/bin/
+  sudo ln -sf "$HOME"/opt/SEGGER/"${NEWEST_SDK/.tgz/}"/* /usr/bin/
 
   sudo cp "$HOME/opt/SEGGER/${NEWEST_SDK/.tgz/}/99-jlink.rules" /etc/udev/rules.d/99-jlink.rules
 
@@ -94,7 +94,6 @@ function InstallToolchain()
 
   echo "--- Verify Toolchain ---"
   echo "$(arm-none-eabi-gcc --version)"
-  echo "$(arm-none-eabi-gdb --version)"
 
 }
 
